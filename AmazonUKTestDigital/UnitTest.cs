@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -10,13 +11,14 @@ namespace AmazonUKTestDigital
     public class UnitTest
     {
         IWebDriver driver;
+        String URL = "https://www.amazon.co.uk/";
 
         [SetUp]
         public void Setup()
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            driver.Url = "https://www.amazon.co.uk/";
+            driver.Url = URL;
         }
 
         [TearDown]
@@ -35,6 +37,8 @@ namespace AmazonUKTestDigital
             IWebElement searchButton = driver.FindElement(By.ClassName("nav-input"));
             searchButton.Click();
 
+            // Test URL
+            Assert.AreNotEqual(URL, driver.Url);
             // Wait finding Element result list
             new WebDriverWait(driver, TimeSpan.FromSeconds(2.0)).Until(ExpectedConditions.ElementExists(By.ClassName("s-result-list")));
             IWebElement result = driver.FindElement(By.ClassName("s-result-list"));
