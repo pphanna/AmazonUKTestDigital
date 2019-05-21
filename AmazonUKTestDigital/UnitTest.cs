@@ -14,7 +14,6 @@ namespace AmazonUKTestDigital
         [SetUp]
         public void Setup()
         {
-            Console.WriteLine("Setup Driver");
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Url = "https://www.amazon.co.uk/";
@@ -23,7 +22,6 @@ namespace AmazonUKTestDigital
         [TearDown]
         public void Cleanup()
         {
-            Console.WriteLine("Exit browser");
             driver.Quit();
         }
 
